@@ -37,7 +37,7 @@ def main():
 	max_date_dataset = str_to_date(df.creation_date.max()) # Находим последнюю дату в датасете за вчера
 	min_date_dataset = str_to_date(df.creation_date.min()) # Находим первую дату в датасете за вчера
 
-	result = f'За вчерашний день: {yesterday} Roistat насчитывает {count_leads} лида в проекте gofromir.ru.' # Формируем результат ответа
+	result = f'За вчерашний день: {yesterday} Roistat насчитывает {count_leads} лида в проекте project.ru.' # Формируем результат ответа
 
 	if max_date_dataset == min_date_dataset and min_date_dataset == yesterday: # прверяем условием, сходятся даты в датасете с объявленными переменными
 		return result
