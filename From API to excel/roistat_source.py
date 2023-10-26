@@ -15,7 +15,7 @@ def join_source(x):
     result_string = ' → '.join(x)
     return result_string
 
-
+###функция, которая строки с источниками и возвращает их в удобочинаемы для разделения вид.
 def direct_separate(x):
     try:
         direct_cpc_key = 'Яндекс.Директ'
@@ -53,6 +53,7 @@ def direct_separate(x):
 
 def main():
 ###Проверяем какой сегодня день недели по счету, если понедельник, то диапазон дат для обновления увеличивается на +2 дня
+###Это нужно для того, чтоб каждый понедельник не обновлять даты выгрузки в скрипте   
 
     today_weekday = datetime.today().date().weekday() 
     if today_weekday == 0:
@@ -63,8 +64,8 @@ def main():
         after_yesterday = datetime.today().date() - timedelta(days=2)
     
 ###Пишем API запрос
-    api_key = 'e7eff504b008bc3feb67ed863c5cdece'
-    project =79892
+    api_key = 'YOUR TOKEN KEY'
+    project =12345
     api_url =f'https://cloud.roistat.com/api/v1/project/integration/order/list?project={project}&key={api_key}'
     payload = {"filters": {"and": [["creation_date",">",f"{after_yesterday}T23:59:59+0000"],["creation_date","<",f"{yesterday}T23:59:59+0000"]]}, "extend": [
             "visit"]}
@@ -87,7 +88,7 @@ def main():
 
 
 
-    with open(r'\\192.168.1.241\Share_doc\Marketing\Данные по трафику\Roistat источники брать от сюда.xlsx', 'rb') as file: ###Читаем DataFrame со страыми данными
+    with open(r'\\XXXXXXXX\XXXXXXX\XXXXXXXXXX\XXXXXXXXXXXXXXX\Roistat источники брать от сюда.xlsx', 'rb') as file: ###Читаем DataFrame со страыми данными
         dataframe = pd.read_excel(file, sheet_name='Лист1')
 
     count_dataframe = len(dataframe)  ###Строк в датасете до добавления
@@ -105,7 +106,7 @@ def main():
     
     #result_df_no_duplicates.to_excel(r'C:\Users\gav\Desktop\UA - datasets/roistat_source_db_1.xlsx', sheet_name='Лист1', index=False)
     try:
-        result_df_no_duplicates.to_excel(r'\\192.168.1.241\Share_doc\Marketing\Данные по трафику\Roistat источники брать от сюда.xlsx', sheet_name='Лист1', index=False)
+        result_df_no_duplicates.to_excel(r'\\XXXXXXXX\XXXXXXX\XXXXXXXXXX\XXXXXXXXXXXXXXX\Roistat источники брать от сюда.xlsx', sheet_name='Лист1', index=False)
         if last_dataframe_date == yesterday:
             print('_ '*25)
             print('All right!')
@@ -115,7 +116,6 @@ def main():
             print('The last date in the dataset is not equal to yesterday...')
     except:
         print('Something went wrong when trying to save the datacet...')
-
 
 
 if __name__=='__main__':
