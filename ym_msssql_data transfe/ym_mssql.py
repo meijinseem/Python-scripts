@@ -19,12 +19,12 @@ after_yesterday = datetime.today().date() - timedelta(days=4) # Определя
 
 #<--------------------------------------Данные для подключения к Metrica API-------------------------------------------->
 
-header = {'Authorization': 'OAuth y0_AgAEA7qkWajmAAqjZAAAAADvRAj77vujjz5VRlWkGujm3JFL-95T2tw'}   #Прописываем Токен. Дата окончания  12.10.2024 
+header = {'Authorization': 'OAuth YOU TOKEN'}   #Прописываем Токен. Дата окончания  12.10.2024 
 payload = {
     'date1': f'{after_yesterday}',
     'date2': f'{yesterday}',
     'metrics': 'ym:s:visits',
-    'ids': 28341496,      # id счетчика 
+    'ids': 123456789,      # id счетчика 
     'dimensions': 'ym:s:clientID, ym:s:firstTrafficSourceName, ym:s:dateTime, ym:s:firstSearchEngineRootName, ym:s:referer, ym:s:firstVisitDateTime, ym:s:firstUTMSource, ym:s:firstUTMCampaign, ym:s:firstUTMContent, ym:s:firstUTMTerm',
     'accuracy': 'full',   # Семплирование: Все данные
     'limit': 100000,      # Лимит строк
@@ -34,10 +34,10 @@ payload = {
 
 #<--------------------------------------Данные для подключения к БД-------------------------------------------->
 
-server = '1cbase'     # Имя сервера
-database = 'db_yna'   # Название БД
-username = 'market'   # Имя пользователя
-password = 'Mrkt_1156'  # Пароль для подключения
+server = 'SERVERNAME'     # Имя сервера
+database = 'DBNAME'   # Название БД
+username = 'USERNAME'   # Имя пользователя
+password = 'PASSWORD'  # Пароль для подключения
 
 
 
@@ -49,7 +49,7 @@ def db_insert(date_insert,count_data):
     connection_string = f'DRIVER={{SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password}'
 
     # Пишем запрос, указывая колонки в которых будет добавляться значение и переменные в VALUES()
-    sql_insert_query = '''INSERT INTO [dbo].[MetrciaSource222] (ClientID, FirstTrafficSource, DateAndTime, FirstSearchEngine, Referrer, DateAndTimeFirst, UTMSource, UTMContent, UTMTerm, UTMCampaignName, UTMCampaignID)
+    sql_insert_query = '''INSERT INTO [dbo].[MetrciaSource] (ClientID, FirstTrafficSource, DateAndTime, FirstSearchEngine, Referrer, DateAndTimeFirst, UTMSource, UTMContent, UTMTerm, UTMCampaignName, UTMCampaignID)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     '''
     # Подключаемся
